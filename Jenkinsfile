@@ -3,27 +3,48 @@ pipeline{
     stages{
         stage("TF Init"){
             steps{
-                echo "Executing Terraform Init"
+                script{
+                    echo "Executing Terraform Init"
+                    sh(script: '''
+                        terraform init
+                ''')
+                }
             }
         }
         stage("TF Validate"){
             steps{
-                echo "Validating Terraform Code"
+                script{
+                    echo "Validating Terraform Code"
+                    sh("terraform validate")
+                }
             }
         }
         stage("TF Plan"){
             steps{
-                echo "Executing Terraform Plan"
+                script{
+                    echo "Executing Terraform Plan"
+                    sh("terraform plan -out=plan")
+                }
             }
         }
         stage("TF Apply"){
             steps{
-                echo "Executing Terraform Apply"
+                script{
+                    echo "Executing Terraform Apply"
+                    sh("terraform apply --auto-approve")
+                    env.LAMBDA_FUNC_NAME = sh(returnStdout: true, script: """
+                        terraform output -raw LAMBDA_FUNC_NAME
+                    """).trim()
+                }
+                
             }
         }
         stage("Invoke Lambda"){
             steps{
-                echo "Invoking your AWS Lambda"
+                script{
+                    echo "Invoking your AWS Lambda"
+                    sh("aws lambda invoke --function-name ${env.LAMBDA_FUNC_NAME} --log-type Tail response.json")
+                }
             }
         }
     }

@@ -20,7 +20,7 @@ Your Terraform code will cover the creation of:
 * Private Subnet
 * Routing Table
 * Lambda Function
-  * Security Group
+* Security Group
 
 We will provide the *VPC ID*, *NAT Gateway ID*, *Lambda IAM Role & Policy*. \
 Check the [data.tf](https://github.com/jerasioren/devops-candidate-exam/blob/main/data.tf) for reference to those resources.
