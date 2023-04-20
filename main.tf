@@ -2,7 +2,7 @@
 resource "aws_subnet" "private" {
   vpc_id = data.aws_vpc.vpc.id
   cidr_block = "10.0.4.0/24"
-  availability_zone = "ap-south-1"
+  availability_zone = "ap-south-1a"
   map_public_ip_on_launch = false
 }
 
@@ -11,7 +11,7 @@ resource "aws_route_table" "private_table" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    nat_gateway_id = data.aws_nat_gateway.default.id
+    nat_gateway_id = data.aws_nat_gateway.nat.id
   }
 }
 
@@ -20,11 +20,11 @@ resource "aws_route_table_association" "private_table_assoctation" {
   route_table_id = aws_route_table.private_table.id
 }
 
-resource "aws_security_group" "my_security" {
-  name = "exam_raj"
-  vpc_id = data.aws_vpc.vpc.id
+# resource "aws_security_group" "my_security" {
+#   name = "exam_raj"
+#   vpc_id = data.aws_vpc.vpc.id
 
-}
+# }
 
 resource "aws_lambda_function" "lambda_function" {
   filename = "lambda_fun.zip"
