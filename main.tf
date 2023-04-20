@@ -30,6 +30,6 @@ resource "aws_lambda_function" "lambda_function" {
   filename = "lambda_fun.zip"
   function_name = "lambda_fun"
   role = data.aws_iam_role.example.arn
-  handler = "lambda_fun.lambda_handler"
+  handler = "lambda_fun.lambda"
   runtime = "python3.8"
 }
