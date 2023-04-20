@@ -20,4 +20,4 @@ def lambda(event, context):
 
     print(response.status_code)
     print(response.json())
-return result
+  return result
