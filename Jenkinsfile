@@ -5,9 +5,8 @@ pipeline{
             steps{
                 script{
                     echo "Executing Terraform Init"
-                    sh(script: '''
-                        terraform init
-                ''')
+                    sh "terraform init"
+
                 }
             }
         }
@@ -32,9 +31,6 @@ pipeline{
                 script{
                     echo "Executing Terraform Apply"
                     sh("terraform apply --auto-approve")
-                    env.LAMBDA_FUNC_NAME = sh(returnStdout: true, script: """
-                        terraform output -raw LAMBDA_FUNC_NAME
-                    """).trim()
                 }
                 
             }
