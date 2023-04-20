@@ -5,8 +5,7 @@ pipeline{
             steps{
                 script{
                     echo "Executing Terraform Init"
-                    sh "terraform init"
-
+                    sh("terraform init")
                 }
             }
         }
@@ -39,7 +38,7 @@ pipeline{
             steps{
                 script{
                     echo "Invoking your AWS Lambda"
-                    sh("aws lambda invoke --function-name ${env.LAMBDA_FUNC_NAME} --log-type Tail response.json")
+                    sh("aws lambda invoke --function-name lambda_fun --log-type Tail response.json")
                 }
             }
         }
