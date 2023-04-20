@@ -34,13 +34,13 @@ pipeline{
                 
             }
         }
-        stage("Invoke Lambda"){
-            steps{
-                script{
-                    echo "Invoking your AWS Lambda"
-                    sh("aws lambda invoke --function-name lambda_fun --log-type Tail response.json")
-                }
-            }
-        }
+        // stage("Invoke Lambda"){
+        //     steps{
+        //         script{
+        //             echo "Invoking your AWS Lambda"
+        //             sh("aws lambda invoke --function-name lambda_fun --log-type Tail response.json")
+        //         }
+        //     }
+        // }
     }
 }
