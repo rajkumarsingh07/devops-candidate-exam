@@ -21,10 +21,10 @@ resource "aws_route_table_association" "private_table_assoctation" {
 }
 
 
-resource "aws_lambda_function" "lambda" {
-  function_name = "lambda_fun"
+resource "aws_lambda_function" "lambda_function" {
+  function_name = "lambda_function"
   role = data.aws_iam_role.lambda.arn
-  handler = "lambda_fun.lambda"
+  handler = "lambda_function.lambda"
   runtime = "python3.8"
-  filename = "lambda_fun.zip"
+  filename = "lambda_function.zip"
 }
